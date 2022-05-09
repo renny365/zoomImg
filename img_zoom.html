@@ -1,0 +1,47 @@
+﻿<html>
+    <head>
+        <title>Zoom</title>
+        <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+        <meta http-equiv="imagetoolbar" content="no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function showMaxImg(obj){
+                var src=$(obj).attr("src");
+                $("#imgModal").find("#imgshow").html("<img src='"+src+"' style='width:600px;height:600px; cursor:zoom-out;' class='carousel-inner img-responsive img-rounded' data-dismiss='modal'>");
+                $("#imgModal").modal('show');
+            }
+            document.onmousemove=mtrack;
+            function mtrack(e) {
+            var x,y,x1,x2,y1,y2;
+            fact=800/400;
+            opp=100;
+            if (e==null) e=window.event;
+            x=e.clientX;
+            y=e.clientY;
+            x1=-opp+(x)*fact; // left
+            y1=-opp+(y)*fact; // top
+            x2=+opp+(x)*fact; // rightnor
+            y2=+opp+(y)*fact; // bottom
+            document.images.zoom.style.display="inline";
+            document.images.zoom.style.left=(x)*(1-fact);
+            document.images.zoom.style.top=(y)*(1-fact);
+            document.images.zoom.style.clip="rect("+y1+"px,"+x2+"px,"+y2+"px,"+x1+"px)";
+            }        
+        </script>
+    </head>
+    <body>
+        <img name="normal" src="7.jpg" width="400" style="position:absolute; top:0px; left:0px; border:opx; overflow:hidden; display:block">
+        <img name="zoom" onclick="showMaxImg(this)" src="7.jpg" width="800" style="cursor: zoom-in; position:absolute; top:0px; left:0px; border:0px; overflow:hidden; display:none; clip: rect(0px, 100px, 100px, 0px)">
+
+        <div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" data-toggle="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="display:inline-block;width:auto;">
+                <div class="modal-content">
+                    <div id="imgshow" style="cursor:zoom-in;"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
